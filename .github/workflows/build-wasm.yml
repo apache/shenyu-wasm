@@ -1,0 +1,83 @@
+# Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.
+# The ASF licenses this file to You under the Apache License, Version 2.0
+# (the "License"); you may not use this file except in compliance with
+# the License.  You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+name: build wasm
+
+on: [push]
+
+jobs:
+  linux:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up rust
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
+      - name: Build with rust
+        run: |
+          cd ${{ github.workspace }}/shenyu-wasm-build
+          /home/runner/.cargo/bin/cargo clean
+          /home/runner/.cargo/bin/cargo build --release
+      - uses: actions/upload-artifact@v2
+        with:
+          name: lib
+          path: shenyu-wasm-build/target/release/*.so
+          if-no-files-found: error
+
+  mac:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up rust
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
+      - name: Build with rust
+        run: |
+          cd ${{ github.workspace }}/shenyu-wasm-build
+          /Users/runner/.cargo/bin/cargo clean
+          /Users/runner/.cargo/bin/cargo build --release
+      - uses: actions/upload-artifact@v2
+        with:
+          name: lib
+          path: shenyu-wasm-build/target/release/*.dylib
+          if-no-files-found: error
+
+  windows:
+    runs-on: windows-2019
+    steps:
+      - uses: actions/checkout@v2
+        continue-on-error: true
+      - name: Set up rust
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
+      - name: Build with rust
+        run: |
+          cd ${{ github.workspace }}/shenyu-wasm-build
+          C://Users//runneradmin//.cargo//bin//cargo.exe clean
+          C://Users//runneradmin//.cargo//bin//cargo.exe build --release
+      - uses: actions/upload-artifact@v2
+        with:
+          name: lib
+          path: shenyu-wasm-build/target/release/*.dll
+          if-no-files-found: error

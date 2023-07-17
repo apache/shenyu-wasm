@@ -1,5 +1,4 @@
-/.gradle
-/artifacts
-/build
-/include/org/
-/target
+/.idea
+**/*.iml
+**/target
+**/*.lock
