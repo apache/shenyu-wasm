@@ -48,7 +48,7 @@ class InstanceTest {
     }
     
     @Test
-    void arity_0() throws Exception {
+    void arity0() throws Exception {
         Instance instance = new Instance(getBytes());
         
         assertEquals(42, (Integer) instance.getFunction("arity_0").apply()[0]);
@@ -57,7 +57,7 @@ class InstanceTest {
     }
     
     @Test
-    void i32_i32() throws Exception {
+    void i32I32() throws Exception {
         Instance instance = new Instance(getBytes());
         
         assertEquals(42, (Integer) instance.getFunction("i32_i32").apply(42)[0]);
@@ -66,7 +66,7 @@ class InstanceTest {
     }
     
     @Test
-    void i64_i64() throws Exception {
+    void i64I64() throws Exception {
         Instance instance = new Instance(getBytes());
         
         assertEquals(42L, (Long) instance.getFunction("i64_i64").apply(42L)[0]);
@@ -75,7 +75,7 @@ class InstanceTest {
     }
     
     @Test
-    void f32_f32() throws Exception {
+    void f32F32() throws Exception {
         Instance instance = new Instance(getBytes());
         
         assertEquals(42.0f, (Float) instance.getFunction("f32_f32").apply(42.0f)[0]);
@@ -84,7 +84,7 @@ class InstanceTest {
     }
     
     @Test
-    void f64_f64() throws Exception {
+    void f64F64() throws Exception {
         Instance instance = new Instance(getBytes());
         
         assertEquals(42.0d, (Double) instance.getFunction("f64_f64").apply(42.0d)[0]);
@@ -93,7 +93,7 @@ class InstanceTest {
     }
     
     @Test
-    void i32_i64_f32_f64_f64() throws Exception {
+    void i32I64F32F64F64() throws Exception {
         Instance instance = new Instance(getBytes());
         
         assertEquals(10.0d, (Double) instance.getFunction("i32_i64_f32_f64_f64").apply(1, 2L, 3.0f, 4.0d)[0]);
@@ -102,7 +102,7 @@ class InstanceTest {
     }
     
     @Test
-    void bool_casted_to_i32() throws Exception {
+    void boolCastedToI32() throws Exception {
         Instance instance = new Instance(getBytes());
         
         assertEquals(1, (int) (Integer) instance.getFunction("bool_casted_to_i32").apply()[0]);

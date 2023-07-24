@@ -30,7 +30,7 @@ import org.junit.jupiter.api.Test;
 
 class ModuleTest {
     
-    private byte[] getBytes(String filename) throws Exception {
+    private byte[] getBytes(final String filename) throws Exception {
         Path modulePath = Paths.get(Objects.requireNonNull(getClass().getClassLoader().getResource(filename)).toURI());
         return Files.readAllBytes(modulePath);
     }

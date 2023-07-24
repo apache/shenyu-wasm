@@ -30,7 +30,7 @@ import org.junit.jupiter.api.Test;
 
 class MemoryTest {
     
-    private byte[] getBytes(String filename) throws Exception {
+    private byte[] getBytes(final String filename) throws Exception {
         Path modulePath = Paths.get(Objects.requireNonNull(getClass().getClassLoader().getResource(filename)).toURI());
         return Files.readAllBytes(modulePath);
     }
@@ -118,32 +118,28 @@ class MemoryTest {
     void javaBorrowsRustMemory() throws Exception {
         Instance instance = new Instance(getBytes("tests.wasm"));
         
-        {
-            Memory memory = instance.getMemory("memory");
-            ByteBuffer memoryBuffer = memory.buffer();
-            
-            int pointer = (Integer) instance.getFunction("string").apply()[0];
-            byte[] data = new byte[13];
-            memoryBuffer.position(pointer);
-            memoryBuffer.get(data);
-            
-            assertEquals("Hello, World!", new String(data));
-            
-            memoryBuffer.position(pointer);
-            memoryBuffer.put(new byte[]{'A'});
-        }
+        Memory memory = instance.getMemory("memory");
+        ByteBuffer memoryBuffer = memory.buffer();
         
-        {
-            Memory memory = instance.getMemory("memory");
-            ByteBuffer memoryBuffer = memory.buffer();
-            
-            int pointer = (Integer) instance.getFunction("string").apply()[0];
-            byte[] data = new byte[13];
-            memoryBuffer.position(pointer);
-            memoryBuffer.get(data);
-            
-            assertEquals("Aello, World!", new String(data));
-        }
+        int pointer = (Integer) instance.getFunction("string").apply()[0];
+        byte[] data = new byte[13];
+        memoryBuffer.position(pointer);
+        memoryBuffer.get(data);
+        
+        assertEquals("Hello, World!", new String(data));
+        
+        memoryBuffer.position(pointer);
+        memoryBuffer.put(new byte[]{'A'});
+        
+        memory = instance.getMemory("memory");
+        memoryBuffer = memory.buffer();
+        
+        pointer = (Integer) instance.getFunction("string").apply()[0];
+        data = new byte[13];
+        memoryBuffer.position(pointer);
+        memoryBuffer.get(data);
+        
+        assertEquals("Aello, World!", new String(data));
         
         instance.close();
     }
