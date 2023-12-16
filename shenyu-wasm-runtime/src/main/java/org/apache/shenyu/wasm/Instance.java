@@ -17,7 +17,7 @@
 
 package org.apache.shenyu.wasm;
 
-import org.apache.shenyu.wasm.exports.Function;
+import org.apache.shenyu.wasm.exports.NativeFunction;
 
 /**
  * `Instance` is a Java class that represents a WebAssembly instance.
@@ -56,6 +56,9 @@ public class Instance {
         nativeInitializeExportedMemories(instancePointer);
     }
     
+    /**
+     * The constructor instantiates a new WebAssembly instance.
+     */
     protected Instance() {
         this.exports = new Exports(this);
     }
@@ -74,6 +77,7 @@ public class Instance {
      * Delete an instance object pointer, which is called by the garbage collector before an object is removed from the
      * memory.
      */
+    @SuppressWarnings("removal")
     @Override
     protected void finalize() throws Throwable {
         this.close();
@@ -105,7 +109,7 @@ public class Instance {
      * @return the exported function
      * @throws ClassCastException if class cast failed
      */
-    public Function getFunction(final String name) throws ClassCastException {
+    public NativeFunction getFunction(final String name) throws ClassCastException {
         return this.exports.getFunction(name);
     }
     
@@ -122,12 +126,35 @@ public class Instance {
     
     private native long nativeInstantiate(Instance self, byte[] moduleBytes);
     
+    /**
+     * Clean native resources.
+     *
+     * @param instancePointer pointer.
+     */
     private native void nativeDrop(long instancePointer);
     
+    /**
+     * Export native call as java functions.
+     *
+     * @param instancePointer pointer.
+     * @param exportName      name.
+     * @param arguments       args.
+     * @return java functions.
+     */
     protected native Object[] nativeCallExportedFunction(long instancePointer, String exportName, Object[] arguments);
     
+    /**
+     * nativeInitializeExportedFunctions.
+     *
+     * @param instancePointer pointer.
+     */
     protected static native void nativeInitializeExportedFunctions(long instancePointer);
     
+    /**
+     * nativeInitializeExportedMemories.
+     *
+     * @param instancePointer pointer.
+     */
     protected static native void nativeInitializeExportedMemories(long instancePointer);
     
 }

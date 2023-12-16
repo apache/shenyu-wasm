@@ -53,7 +53,6 @@ public class Module {
      * Create an original Module object from a byte array.
      *
      * @param serializedBytes serialized bytes
-     *
      * @return Module object.
      */
     public static Module deserialize(final byte[] serializedBytes) {

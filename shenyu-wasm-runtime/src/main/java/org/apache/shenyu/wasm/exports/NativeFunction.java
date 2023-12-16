@@ -24,7 +24,7 @@ package org.apache.shenyu.wasm.exports;
  * <p>The apply method takes an arbitrary number of arguments and returns an output.
  */
 @FunctionalInterface
-public interface Function extends Export {
+public interface NativeFunction extends Export {
     
     /**
      * call the function from WASM.

@@ -26,7 +26,8 @@ public class ShenyuWasmInitException extends RuntimeException {
     
     private static final long serialVersionUID = -2853315010514908541L;
     
-    /** Constructs a new exception with {@code null} as its
+    /**
+     * Constructs a new exception with {@code null} as its
      * detail message.  The cause is not initialized, and may subsequently be
      * initialized by a call to {@link #initCause}.
      */
@@ -55,11 +56,11 @@ public class ShenyuWasmInitException extends RuntimeException {
      * this exception's detail message.
      *
      * @param message the detail message (which is saved for later retrieval
-     *        by the {@link #getMessage()} method).
-     * @param cause the cause (which is saved for later retrieval by the
-     *        {@link #getCause()} method).  (A <tt>null</tt> value is
-     *        permitted, and indicates that the cause is nonexistent or
-     *        unknown.)
+     *                by the {@link #getMessage()} method).
+     * @param cause   the cause (which is saved for later retrieval by the
+     *                {@link #getCause()} method).  (A null value is
+     *                permitted, and indicates that the cause is nonexistent or
+     *                unknown.)
      */
     public ShenyuWasmInitException(final String message, final Throwable cause) {
         super(message, cause);
@@ -67,15 +68,15 @@ public class ShenyuWasmInitException extends RuntimeException {
     
     /**
      * Constructs a new exception with the specified cause and a
-     * detail message of <tt>(cause==null ? null : cause.toString())</tt>
+     * detail message of (cause==null ? null : cause.toString())
      * (which typically contains the class and detail message of
-     * <tt>cause</tt>). This constructor is useful for exceptions
+     * cause). This constructor is useful for exceptions
      * that are little more than wrappers for other throwables.
      *
      * @param cause the cause (which is saved for later retrieval by the
-     *        {@link #getCause()} method). (A <tt>null</tt> value is
-     *        permitted, and indicates that the cause is nonexistent or
-     *        unknown.)
+     *              {@link #getCause()} method). (A null value is
+     *              permitted, and indicates that the cause is nonexistent or
+     *              unknown.)
      */
     public ShenyuWasmInitException(final Throwable cause) {
         super(cause);

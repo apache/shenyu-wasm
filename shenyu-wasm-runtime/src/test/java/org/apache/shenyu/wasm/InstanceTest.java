@@ -26,7 +26,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
-import org.apache.shenyu.wasm.exports.Function;
+import org.apache.shenyu.wasm.exports.NativeFunction;
 import org.junit.jupiter.api.Test;
 
 class InstanceTest {
@@ -40,7 +40,7 @@ class InstanceTest {
     @Test
     void sum() throws Exception {
         Instance instance = new Instance(getBytes());
-        Function sum = instance.getFunction("sum");
+        NativeFunction sum = instance.getFunction("sum");
         
         assertEquals(3, sum.apply(1, 2)[0]);
         
