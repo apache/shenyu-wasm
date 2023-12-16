@@ -1,6 +1,6 @@
 # shenyu-wasm
 
-This repository is forked from [wasmer-java](https://github.com/wasmerio/wasmer-java), which simplifies dependencies by directly packing the dylib into the jar, and decompressing and loading the dylib at runtime, ready to use out of the box.
+This repository is forked from [wasmer-java](https://github.com/wasmerio/wasmer-java), which simplifies usage by directly packing the dylib into the jar, and decompressing and loading the dylib at runtime, ready to use out of the box.
 
 If you find anything unreasonable, please send email `dev@shenyu.apache.org` or `zhangzicheng@apache.org`.
 
