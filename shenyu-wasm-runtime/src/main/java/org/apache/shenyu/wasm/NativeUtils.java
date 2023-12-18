@@ -22,7 +22,7 @@ import java.util.Locale;
 /**
  * The type NativeUtils.
  */
-public class NativeUtils {
+public abstract class NativeUtils {
     
     private static final String OPERATING_SYSTEM_NAME = System.getProperty("os.name").toLowerCase(Locale.ENGLISH);
     
@@ -40,6 +40,9 @@ public class NativeUtils {
         } else {
             throw new ShenyuWasmInitException("Unsupported system !");
         }
+    }
+    
+    private NativeUtils() {
     }
     
     /**

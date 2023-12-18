@@ -19,6 +19,7 @@ package org.apache.shenyu.wasm;
 
 import java.io.File;
 import java.util.concurrent.atomic.AtomicBoolean;
+
 import org.scijava.nativelib.JniExtractor;
 import org.scijava.nativelib.NativeLoader;
 
@@ -26,11 +27,14 @@ import org.scijava.nativelib.NativeLoader;
  * Code reduced and simplified from zmq integration in Java. See
  * https://github.com/zeromq/jzmq/blob/3384ea1c04876426215fe76b5d1aabc58c099ca0/jzmq-jni/src/main/java/org/zeromq/EmbeddedLibraryTools.java.
  */
-public class Native {
+public abstract class Native {
     
     private static final AtomicBoolean INITED = new AtomicBoolean();
     
     private static final AtomicBoolean SUCCESS = new AtomicBoolean();
+    
+    private Native() {
+    }
     
     /**
      * load the native library.

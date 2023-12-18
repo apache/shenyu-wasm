@@ -19,8 +19,10 @@ package org.apache.shenyu.wasm;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
+
 import org.apache.shenyu.wasm.exports.Export;
-import org.apache.shenyu.wasm.exports.Function;
+import org.apache.shenyu.wasm.exports.NativeFunction;
 
 /**
  * `Exports` is a Java class that represents the set of WebAssembly exports.
@@ -48,9 +50,9 @@ public class Exports {
      * Lambda expression for currying. This takes a function name and returns the function to call WebAssembly
      * function.
      */
-    private final java.util.function.Function<String, Function> functionWrapperGenerator =
-        functionName -> arguments -> this.instance.nativeCallExportedFunction(
-                this.instance.getInstancePointer(), functionName, arguments);
+    private final Function<String, NativeFunction> functionWrapperGenerator
+            = functionName -> arguments -> this.instance.nativeCallExportedFunction(
+            this.instance.getInstancePointer(), functionName, arguments);
     
     /**
      * The constructor instantiates new exported functions.
@@ -79,8 +81,8 @@ public class Exports {
      * @return the exported function
      * @throws ClassCastException if class cast failed
      */
-    public Function getFunction(final String name) throws ClassCastException {
-        return (Function) this.inner.get(name);
+    public NativeFunction getFunction(final String name) throws ClassCastException {
+        return (NativeFunction) this.inner.get(name);
     }
     
     /**
@@ -111,7 +113,7 @@ public class Exports {
     /**
      * Generate the exported function wrapper.
      */
-    private Function generateFunctionWrapper(final String functionName) {
+    private NativeFunction generateFunctionWrapper(final String functionName) {
         return this.functionWrapperGenerator.apply(functionName);
     }
 }
