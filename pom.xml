@@ -29,7 +29,10 @@
     <name>shenyu-wasm</name>
     <packaging>pom</packaging>
     <modules>
+        <!-- shenyu-wasm-build only used to generate dylibs by CI -->
+        <!-- <module>shenyu-wasm-build</module> -->
         <module>shenyu-wasm-runtime</module>
+        <module>shenyu-wasm-dist</module>
     </modules>
 
     <licenses>
@@ -75,6 +78,7 @@
         <maven-checkstyle-plugin.version>3.1.0</maven-checkstyle-plugin.version>
         <jacoco-maven-plugin.version>0.8.7</jacoco-maven-plugin.version>
         <apache-rat-plugin.version>0.13</apache-rat-plugin.version>
+        <maven-assembly-plugin.version>3.5.0</maven-assembly-plugin.version>
     </properties>
 
     <dependencyManagement>
