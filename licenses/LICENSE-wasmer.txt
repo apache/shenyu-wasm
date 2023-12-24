@@ -1,3 +1,6 @@
+wasmer License
+---------------
+
 MIT License
 
 Copyright (c) 2019-present Wasmer, Inc. and its affiliates.
