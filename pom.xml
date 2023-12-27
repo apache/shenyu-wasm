@@ -173,8 +173,8 @@
                 <configuration>
                     <configLocation>/script/shenyu_checkstyle.xml</configLocation>
                     <headerLocation>/script/checkstyle-header.txt</headerLocation>
+                    <suppressionsLocation>/script/shenyu_checkstyle_suppressions.xml</suppressionsLocation>
                     <includeTestSourceDirectory>true</includeTestSourceDirectory>
-                    <excludes>**/transfer/**/*</excludes>
                 </configuration>
                 <executions>
                     <execution>
