@@ -15,7 +15,10 @@
 
 name: build wasm
 
-on: [push]
+on: [push, pull_request]
+
+permissions:
+  contents: read
 
 jobs:
   linux:
@@ -23,11 +26,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Set up rust
-        uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: stable
-          override: true
+        run: |
+           rustup toolchain add --profile=minimal stable
+           rustup override set stable
       - name: Build with rust
         run: |
           cd ${{ github.workspace }}/shenyu-wasm-build
@@ -44,11 +45,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Set up rust
-        uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: stable
-          override: true
+        run: |
+           rustup toolchain add --profile=minimal stable
+           rustup override set stable
       - name: Build with rust
         run: |
           cd ${{ github.workspace }}/shenyu-wasm-build
@@ -66,11 +65,9 @@ jobs:
       - uses: actions/checkout@v2
         continue-on-error: true
       - name: Set up rust
-        uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: stable
-          override: true
+        run: |
+           rustup toolchain add --profile=minimal stable
+           rustup override set stable
       - name: Build with rust
         run: |
           cd ${{ github.workspace }}/shenyu-wasm-build
